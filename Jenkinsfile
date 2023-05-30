@@ -14,10 +14,12 @@ pipeline {
         
         stage("Push") {
             steps {
+		 withCredentials([usernamePassword(credentialsId: 'yoyo', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]){
                 // Push the code to the remote repository
                 sh 'git checkout main' // Switch to the main branch
                 sh 'git tag ${tag}' // Create a new tag
                 sh 'git push origin ${tag}' // Push the tag to the remote repository
+		}
             }
         }
     }
