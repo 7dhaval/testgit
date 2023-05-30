@@ -3,15 +3,6 @@ pipeline {
 	parameters {
         string defaultValue: '1.0.1', description: 'Choose Your Git Tag', name: 'tag'
          }
-    
-    stages {
-        stage("Clone") {
-            steps {
-                // Clone the repository
-                git 'https://github.com/7dhaval/testgit.git'
-            }
-        }
-        
         stage("Build") {
             steps {
                 // Build your code or perform any necessary actions
