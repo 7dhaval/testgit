@@ -1,8 +1,9 @@
 pipeline {
     agent any
-	parameters {
-        string defaultValue: '1.0.1', description: 'Choose Your Git Tag', name: 'tag'
+       parameters {
+             string defaultValue: '1.0.1', description: 'Choose Your Git Tag', name: 'tag'
          }
+    stages {
         stage("Build") {
             steps {
                 // Build your code or perform any necessary actions
@@ -14,8 +15,9 @@ pipeline {
         stage("Push") {
             steps {
                 // Push the code to the remote repository
-                sh 'git tag ${tag}'
-                sh 'git push origin main'
+                sh 'git checkout main' // Switch to the main branch
+                sh 'git tag ${tag}' // Create a new tag
+                sh 'git push origin ${tag}' // Push the tag to the remote repository
             }
         }
     }
