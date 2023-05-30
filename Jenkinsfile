@@ -1,4 +1,4 @@
-pipeline{
+pipeline {
     agent any
     parameters {
         string defaultValue: '1.0.1', description: 'Choose Your Git Tag', name: 'tag'
@@ -14,8 +14,10 @@ pipeline{
         stage("Push Tag") {
             steps {
                 script {
-                    sh "git tag ${params.tag}"
-                    sh "git push origin ${params.tag}"
+                    withCredentials([usernamePassword(credentialsId: 'githu', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+                        sh "git tag ${params.tag}"
+                        sh "git push origin ${params.tag}"
+                    }
                 }
             }
         }
