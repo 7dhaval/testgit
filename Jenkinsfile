@@ -22,7 +22,7 @@ pipeline {
                 // Push the code to the remote repository
                 sh 'git add .'
                 sh 'git commit -m "Jenkins pipeline commit"'
-                sh 'git push origin master'
+                sh 'git push origin main'
             }
         }
     }
