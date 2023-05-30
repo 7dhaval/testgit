@@ -1,5 +1,8 @@
 pipeline {
     agent any
+	parameters {
+        string defaultValue: '1.0.1', description: 'Choose Your Git Tag', name: 'tag'
+         }
     
     stages {
         stage("Clone") {
@@ -20,8 +23,7 @@ pipeline {
         stage("Push") {
             steps {
                 // Push the code to the remote repository
-                sh 'git add .'
-                sh 'git commit -m "Jenkins pipeline commit"'
+                sh 'git tag ${tag}'
                 sh 'git push origin main'
             }
         }
