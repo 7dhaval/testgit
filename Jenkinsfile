@@ -1,31 +1,15 @@
 pipeline {
     agent any
+    parameters {
+        string defaultValue: '1.0.1', description: 'Choose Your Git Tag', name: 'tag'
+    }
 
     stages {
-        stage("Checkout") {
+        stage("Param Demo") {
             steps {
-                checkout([$class: 'GitSCM',
-                          branches: [[name: '*/master']],
-                          userRemoteConfigs: [[url: 'https://github.com/7dhaval/testgit']]])
-            }
-        }
-
-        stage("Build and Test") {
-            steps {
-                // Perform your build and test steps here
-            }
-        }
-
-        stage("Push Tag") {
-            steps {
-                script {
-                    def tag = "1.0.4" // Replace with your desired tag or use params.tag
-
-                    withCredentials([usernamePassword(credentialsId: 'githu', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
-                        sh "git tag ${tag}"
-                        sh "git push origin ${tag}"
-                    }
-                }
+                echo "Hi, this is your tag ${tag}. Welcome to Jenkins"
+                sh 'git tag ${tag}' // Create a new tag
+                sh 'git push origin ${tag}' // Push the tag to the remote repository
             }
         }
     }
