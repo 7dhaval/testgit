@@ -16,7 +16,7 @@ pipeline {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'githu', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
                         sh "git tag ${params.tag}"
-                        sh "git push origin ${params.tag}"
+                        sh "git -v push https://7dhaval@github.com/testgit ${params.tag}"
                     }
                 }
             }
