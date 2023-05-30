@@ -15,7 +15,7 @@ pipeline {
         stage("Push") {
             steps {
                 // Push the code to the remote repository
-                git remote add origin git@github.com:7dhaval/testgit.git 
+                git remote add origin https://github.com/7dhaval/testgit.git 
                 sh 'git checkout master' // Switch to the main branch
                 sh 'git tag ${tag}' // Create a new tag
                 sh 'git push origin ${tag}' // Push the tag to the remote repository
